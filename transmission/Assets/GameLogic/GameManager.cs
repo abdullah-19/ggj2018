@@ -5,16 +5,21 @@ using UnityEngine.Networking;
 
 public class GameManager : NetworkBehaviour {
   private TimeController timeController;
-  private NotifierController notifierController;
+  // Positive Sentiment
   [SyncVar]
-  public float playerOneRoundScore;
+  public float playerOneResponse;
+  // Negative Sentiment
   [SyncVar]
-  public float playerTwoRoundScore;
+  public float playerTwoResponse;
   [SyncVar]
   private bool gameStarted = false;
+  private NotifierController notifierController;
+  private WeatherManager weatherManager;
 
   void Start () {
     // SetUpComponents();
+    // Find reference to WeatherManager
+    weatherManager = GameObject.Find("WeatherManager").GetComponent<WeatherManager>();
   }
 
   public void UpdatePlayerOneResponse(float response) {
@@ -64,5 +69,4 @@ public class GameManager : NetworkBehaviour {
       gameStarted = true;
     }
   }
-
 }
