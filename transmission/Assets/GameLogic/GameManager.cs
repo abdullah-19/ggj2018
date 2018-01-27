@@ -22,7 +22,7 @@ public class GameManager : NetworkBehaviour {
 
   }
 
-  IEnumerator GetReady() {
+  //IEnumerator GetReady() {
     // SetUpRound(allRounds);
     // PlayMusic();
     notifierController.DisplayTextOnTopOfScreen("Get Ready", 2);
@@ -42,7 +42,7 @@ public class GameManager : NetworkBehaviour {
     // announcer.PlayBeginSound();
     // streakNotifier.DisplayTextOnTopOfScreen("BEGIN", 1);
     // StartRound();
-  }
+  //}
 
   void Awake() {
     timeController = transform.GetComponent<TimeController>();
