@@ -59,7 +59,7 @@ public class WatsonManager : MonoBehaviour
             AuthenticationToken = _nluAuthenticationToken
         };
         _naturalLanguageUnderstanding = new NaturalLanguageUnderstanding(nluCredentials);
-        NLUAnalyze("I hate you so much! Analyze");
+        //NLUAnalyze("I hate you so much! Analyze");
     }
 
     public void EnableWatsonSST()
@@ -130,15 +130,17 @@ public class WatsonManager : MonoBehaviour
         float disgust = resp.emotion.document.emotion.disgust;
         float anger = resp.emotion.document.emotion.anger;
         Debug.Log("This is your sadness: " + sadness+ ", joy: " + joy + " fear: " + fear + " disgust: " + disgust + " anger: " + anger);
-
-        watsonResponse.sentiementScore = resp.sentiment.document.score;
-        watsonResponse.sentiementLabel = label;
-        watsonResponse.sadnessScore = sadness;
-        watsonResponse.joyScore = joy;
-        watsonResponse.fearScore = fear;
-        watsonResponse.disgustScore = disgust;
-        watsonResponse.angerScore = anger;
-        messageSender.SendResponse(watsonResponse);
+        WatsonResponse newWatsonResponse = new WatsonResponse();
+        newWatsonResponse.sentiementScore = resp.sentiment.document.score;
+        newWatsonResponse.sentiementLabel = label;
+        newWatsonResponse.sadnessScore = sadness;
+        newWatsonResponse.joyScore = joy;
+        newWatsonResponse.fearScore = fear;
+        newWatsonResponse.disgustScore = disgust;
+        newWatsonResponse.angerScore = anger;
+        newWatsonResponse.userMessage = resp.analyzed_text;
+        Debug.Log("This is My Watson Response: "+ newWatsonResponse.ToString());
+        messageSender.SendResponse(newWatsonResponse);
         _analyzeTested = true;
     }
 
@@ -284,7 +286,6 @@ public class WatsonManager : MonoBehaviour
                         if(text.Split().Length > 3)
                         {
                             var usermessage = text.Substring(0, text.Length - "(Final, 0.99)".Length - 2);
-                            watsonResponse.userMessage = usermessage;
                             usermessage += " Analyze";
                             Log.Debug("This is your message", usermessage);
                             NLUAnalyze(usermessage);
