@@ -12,13 +12,17 @@ public class Player : NetworkBehaviour {
 
 	}
 
-  // RPC TO START RECORDING
-  void StartRecording() {
+  void Update() {
 
   }
 
-  void SendToWatson() {
+  [Command]
+  void CmdSendWatsonResponse() {
+    if (!isLocalPlayer) return;
 
   }
+
+  
+
 
 }
