@@ -6,17 +6,24 @@ using UnityEngine.Networking;
 public class GameManager : NetworkBehaviour {
     private TimeController timeController;
     private NotifierController notifierController;
+    private WeatherManager weatherManager;
 
+    // Positive Sentiment
     [SyncVar]
     public float playerOneResponse;
+
+    // Negative Sentiment
     [SyncVar]
     public float playerTwoResponse;
 
     void Start () {
-    // SetUpComponents();
-    timeController.StartTime(30);
-    // When other player connects...
-    //StartCoroutine(GetReady());
+        // SetUpComponents();
+        timeController.StartTime(30);
+        // When other player connects...
+        //StartCoroutine(GetReady());
+
+        // Find reference to WeatherManager
+        weatherManager = GameObject.Find("WeatherManager").GetComponent<WeatherManager>();
     }
 
     [Command]
@@ -57,17 +64,16 @@ public class GameManager : NetworkBehaviour {
     }
 
     void Awake() {
-    timeController = transform.GetComponent<TimeController>();
-    notifierController = GameObject.Find("UI/Notifier").GetComponent<NotifierController>();
+        timeController = transform.GetComponent<TimeController>();
+        notifierController = GameObject.Find("UI/Notifier").GetComponent<NotifierController>();
     }
 
-    private Winner calculateWinner() {
-        return Mathf.Abs(playerOneResponse) > Mathf.Abs(playerOneResponse) ? Winner.Player1 : Winner.Player2;
-    }
-
-    public enum Winner
-    {
-        Player1,
-        Player2
+    // Takes the two responses and changes the weather state based on who wins.
+    public void calculateWinner() {
+        if (Mathf.Abs(playerOneResponse) > Mathf.Abs(playerOneResponse)) {
+            weatherManager.IncrementWeatherState();
+        } else {
+            weatherManager.DecrementWeatherState();
+        }
     }
 }
