@@ -59,7 +59,7 @@ public class WatsonManager : MonoBehaviour
             AuthenticationToken = _nluAuthenticationToken
         };
         _naturalLanguageUnderstanding = new NaturalLanguageUnderstanding(nluCredentials);
-        NLUAnalyze("I hate you so much! Analyze");
+        //NLUAnalyze("I hate you so much! Analyze");
     }
 
     public void EnableWatsonSST()
@@ -284,7 +284,6 @@ public class WatsonManager : MonoBehaviour
                         if(text.Split().Length > 3)
                         {
                             var usermessage = text.Substring(0, text.Length - "(Final, 0.99)".Length - 2);
-                            watsonResponse.userMessage = usermessage;
                             usermessage += " Analyze";
                             Log.Debug("This is your message", usermessage);
                             NLUAnalyze(usermessage);
