@@ -10,7 +10,12 @@ public class MessageSender : NetworkBehaviour {
   }
 
   public void SendResponse(WatsonResponse watsonResponse) {
+    Debug.Log("Sending response");
+    if (isServer) {
+      Debug.Log("IS SERVER");
+      gameManager.UpdatePlayerOneResponse(watsonResponse);
+      return;
+    };
     gameManager.CmdUpdatePlayerTwoResponse(watsonResponse);
   }
-
 }

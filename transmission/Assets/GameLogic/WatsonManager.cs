@@ -284,7 +284,7 @@ public class WatsonManager : MonoBehaviour
                         if(text.Split().Length > 3)
                         {
                             var usermessage = text.Substring(0, text.Length - "(Final, 0.99)".Length - 2);
-                            // watsonResponse.userMessage = userMessage;
+                            watsonResponse.userMessage = usermessage;
                             usermessage += " Analyze";
                             Log.Debug("This is your message", usermessage);
                             NLUAnalyze(usermessage);
@@ -323,5 +323,11 @@ public class WatsonManager : MonoBehaviour
                 Log.Debug("ExampleStreaming.OnRecognize()", string.Format("speaker result: {0} | confidence: {3} | from: {1} | to: {2}", labelResult.speaker, labelResult.from, labelResult.to, labelResult.confidence));
             }
         }
+    }
+
+    void Awake() {
+      if (messageSender == null) {
+        messageSender = GetComponent<MessageSender>();
+      }
     }
 }

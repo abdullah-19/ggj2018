@@ -18,29 +18,25 @@ public class GameManager : NetworkBehaviour {
     StartCoroutine(GetReady());
   }
 
-  void WaitForOtherPlayer() {
-
-  }
-
-
-
   [Command]
   public void CmdUpdatePlayerTwoResponse(WatsonResponse response) {
-    if(!isLocalPlayer)
-    {
-      if (isServer) return;
-      playerTwoResponse = response;
-    }
+    playerTwoResponse = response;
+    Debug.Log("UPDATED PLAYER TWO RESPONSE " + response);
+  }
+
+  public void UpdatePlayerOneResponse(WatsonResponse response) {
+    playerOneResponse = response;
+    Debug.Log("UPDATED PLAYER ONE RESPONSE " + response);
   }
 
   void Update() {
-    Debug.Log("PlayerTwo " + playerTwoResponse);
+    Debug.Log("VARS " + playerTwoResponse + " " + playerOneResponse);
   }
 
   IEnumerator GetReady() {
     // SetUpRound(allRounds);
     // PlayMusic();
-    notifierController.DisplayTextOnTopOfScreen("Get Ready", 2);
+    // notifierController.DisplayTextOnTopOfScreen("Get Ready", 2);
     yield return new WaitForSecondsRealtime(2);
     // streakNotifier.DisplayTextOnTopOfScreen(codeBlock.Length + " Chars", 3);
     // yield return new WaitForSecondsRealtime(2);
