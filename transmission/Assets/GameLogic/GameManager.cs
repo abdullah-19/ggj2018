@@ -23,7 +23,7 @@ public class GameManager : NetworkBehaviour {
   }
 
   public void UpdatePlayerOneResponse(float response) {
-    playerOneRoundScore += response;
+    playerOneResponse += response;
   }
 
   IEnumerator GetReady() {
@@ -63,7 +63,7 @@ public class GameManager : NetworkBehaviour {
   }
 
   void checkIfTwoPlayers() {
-    var players = GameObject.FindGameObjectsWithTag("player");
+    var players = GameObject.FindGameObjectsWithTag("Player");
     if (players.Length > 1) {
       StartCoroutine(GetReady());
       gameStarted = true;

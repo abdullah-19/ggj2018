@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114506324546806598}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -170,6 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ResultsField: {fileID: 0}
+  _enabledSTT: 1
   messageSender: {fileID: 114506324546806598}
 --- !u!135 &135292876884449680
 SphereCollider:
