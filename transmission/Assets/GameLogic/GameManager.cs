@@ -15,7 +15,7 @@ public class GameManager : NetworkBehaviour {
     // SetUpComponents();
     timeController.StartTime(30);
     // When other player connects...
-    StartCoroutine(GetReady());
+    //StartCoroutine(GetReady());
   }
 
   [Command]
