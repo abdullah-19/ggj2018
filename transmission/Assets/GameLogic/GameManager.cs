@@ -5,16 +5,17 @@ using UnityEngine.Networking;
 
 public class GameManager : NetworkBehaviour {
   private TimeController timeController;
-  [SyncVar]
-  public WatsonResponse playerOneResponse;
-  [SyncVar]
-  public WatsonResponse playerTwoResponse;
+  private NotifierController notifierController;
+  // [SyncVar]
+  // public WatsonResponse playerOneResponse;
+  // [SyncVar]
+  // public WatsonResponse playerTwoResponse;
 
   void Start () {
     // SetUpComponents();
     timeController.StartTime(30);
     // When other player connects...
-    // StartCoroutine(GetReady());
+    StartCoroutine(GetReady());
   }
 
   void WaitForOtherPlayer() {
@@ -24,8 +25,8 @@ public class GameManager : NetworkBehaviour {
   IEnumerator GetReady() {
     // SetUpRound(allRounds);
     // PlayMusic();
-    // streakNotifier.DisplayTextOnTopOfScreen((allRounds.Count() > 1 ? (allRounds.Count() + 1) + " Rounds" : "1 Round"), 3);
-    // yield return new WaitForSecondsRealtime(2);
+    notifierController.DisplayTextOnTopOfScreen("Get Ready", 2);
+    yield return new WaitForSecondsRealtime(2);
     // streakNotifier.DisplayTextOnTopOfScreen(codeBlock.Length + " Chars", 3);
     // yield return new WaitForSecondsRealtime(2);
     // announcer.PlayGetReadySound();
@@ -45,6 +46,7 @@ public class GameManager : NetworkBehaviour {
 
   void Awake() {
     timeController = transform.GetComponent<TimeController>();
+    notifierController = GameObject.Find("UI/Notifier").GetComponent<NotifierController>();
   }
 
 }
