@@ -222,6 +222,16 @@ Prefab:
       propertyPath: m_PlayerSpawnMethod
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114250415863527394, guid: cda282c39efb34a3286d49bae29ea7e9,
+        type: 2}
+      propertyPath: m_OnlineScene
+      value: test
+      objectReference: {fileID: 0}
+    - target: {fileID: 114250415863527394, guid: cda282c39efb34a3286d49bae29ea7e9,
+        type: 2}
+      propertyPath: m_NetworkAddress
+      value: localhost
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cda282c39efb34a3286d49bae29ea7e9, type: 2}
   m_IsPrefabParent: 0
