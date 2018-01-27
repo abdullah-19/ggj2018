@@ -17,7 +17,13 @@ public class MessageSender : NetworkBehaviour {
       return;
     };
     if (isLocalPlayer) {
-      gameManager.CmdUpdatePlayerTwoResponse(sentimentScore);
+      CmdUpdatePlayerTwoResponse(sentimentScore);
     }
+  }
+
+  [Command]
+  public void CmdUpdatePlayerTwoResponse(float response) {
+    gameManager.playerTwoResponse = response;
+    Debug.Log("UPDATED PLAYER TWO RESPONSE " + response);
   }
 }

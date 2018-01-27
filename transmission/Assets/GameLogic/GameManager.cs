@@ -18,12 +18,6 @@ public class GameManager : NetworkBehaviour {
     StartCoroutine(GetReady());
   }
 
-  [Command]
-  public void CmdUpdatePlayerTwoResponse(float response) {
-    playerTwoResponse = response;
-    Debug.Log("UPDATED PLAYER TWO RESPONSE " + response);
-  }
-
   public void UpdatePlayerOneResponse(float response) {
     playerOneResponse = response;
     Debug.Log("UPDATED PLAYER ONE RESPONSE " + response);
