@@ -20,6 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4382116057058294}
   - component: {fileID: 114152819420602954}
+  - component: {fileID: 114735644800883680}
+  - component: {fileID: 114506324546806598}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -145,6 +147,30 @@ MonoBehaviour:
     i15: 128
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!114 &114506324546806598
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1063085317158912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a716907066b2c433a91efe1f0f129e67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114735644800883680
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1063085317158912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c5b65421f77b4591af89cafdcdf9d67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ResultsField: {fileID: 0}
+  messageSender: {fileID: 114506324546806598}
 --- !u!135 &135292876884449680
 SphereCollider:
   m_ObjectHideFlags: 1
