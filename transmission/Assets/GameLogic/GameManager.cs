@@ -4,36 +4,37 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public class GameManager : NetworkBehaviour {
-  private TimeController timeController;
-  private NotifierController notifierController;
-  [SyncVar]
-  public float playerOneResponse;
-  [SyncVar]
-  public float playerTwoResponse;
+    private TimeController timeController;
+    private NotifierController notifierController;
 
-  void Start () {
+    [SyncVar]
+    public float playerOneResponse;
+    [SyncVar]
+    public float playerTwoResponse;
+
+    void Start () {
     // SetUpComponents();
     timeController.StartTime(30);
     // When other player connects...
     //StartCoroutine(GetReady());
-  }
+    }
 
-  [Command]
-  public void CmdUpdatePlayerTwoResponse(float response) {
+    [Command]
+    public void CmdUpdatePlayerTwoResponse(float response) {
     playerTwoResponse = response;
     Debug.Log("UPDATED PLAYER TWO RESPONSE " + response);
-  }
+    }
 
-  public void UpdatePlayerOneResponse(float response) {
+    public void UpdatePlayerOneResponse(float response) {
     playerOneResponse = response;
     Debug.Log("UPDATED PLAYER ONE RESPONSE " + response);
-  }
+    }
 
-  void Update() {
+    void Update() {
     Debug.Log("VARS " + playerTwoResponse + " " + playerOneResponse);
-  }
+    }
 
-  IEnumerator GetReady() {
+    IEnumerator GetReady() {
     // SetUpRound(allRounds);
     // PlayMusic();
     // notifierController.DisplayTextOnTopOfScreen("Get Ready", 2);
@@ -53,11 +54,20 @@ public class GameManager : NetworkBehaviour {
     // announcer.PlayBeginSound();
     // streakNotifier.DisplayTextOnTopOfScreen("BEGIN", 1);
     // StartRound();
-  }
+    }
 
-  void Awake() {
+    void Awake() {
     timeController = transform.GetComponent<TimeController>();
     notifierController = GameObject.Find("UI/Notifier").GetComponent<NotifierController>();
-  }
+    }
 
+    private Winner calculateWinner() {
+        return Mathf.Abs(playerOneResponse) > Mathf.Abs(playerOneResponse) ? Winner.Player1 : Winner.Player2;
+    }
+
+    public enum Winner
+    {
+        Player1,
+        Player2
+    }
 }
