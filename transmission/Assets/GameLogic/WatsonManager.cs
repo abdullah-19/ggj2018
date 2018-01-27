@@ -107,13 +107,13 @@ public class WatsonManager : MonoBehaviour
 
     private void OnGetModels(ListModelsResults resp, Dictionary<string, object> customData)
     {
-        Log.Debug("ExampleNaturalLanguageUnderstanding.OnGetModels()", "ListModelsResult: {0}", customData["json"].ToString());
+        // Log.Debug("ExampleNaturalLanguageUnderstanding.OnGetModels()", "ListModelsResult: {0}", customData["json"].ToString());
         _getModelsTested = true;
     }
 
     private void OnAnalyze(AnalysisResults resp, Dictionary<string, object> customData)
     {
-        Log.Debug("ExampleNaturalLanguageUnderstanding.OnAnalyze()", "AnalysisResults: {0}", customData["json"].ToString());
+        // Log.Debug("ExampleNaturalLanguageUnderstanding.OnAnalyze()", "AnalysisResults: {0}", customData["json"].ToString());
         string label = "";
         if(resp.sentiment.document.score < 0 )
         {
@@ -123,13 +123,13 @@ public class WatsonManager : MonoBehaviour
         {
             label = "postive";
         }
-        Debug.Log("This is your sentiemnt scores:  " + resp.sentiment.document.score + " label: " + label);
+        // Debug.Log("This is your sentiemnt scores:  " + resp.sentiment.document.score + " label: " + label);
         float sadness = resp.emotion.document.emotion.sadness;
         float joy = resp.emotion.document.emotion.joy;
         float fear = resp.emotion.document.emotion.fear;
         float disgust = resp.emotion.document.emotion.disgust;
         float anger = resp.emotion.document.emotion.anger;
-        Debug.Log("This is your sadness: " + sadness+ ", joy: " + joy + " fear: " + fear + " disgust: " + disgust + " anger: " + anger);
+        // Debug.Log("This is your sadness: " + sadness+ ", joy: " + joy + " fear: " + fear + " disgust: " + disgust + " anger: " + anger);
 
         watsonResponse.sentiementScore = resp.sentiment.document.score;
         watsonResponse.sentiementLabel = label;
@@ -144,14 +144,14 @@ public class WatsonManager : MonoBehaviour
 
     private void OnFail(RESTConnector.Error error, Dictionary<string, object> customData)
     {
-        Log.Error("ExampleNaturalLanguageUnderstanding.OnFail()", "Error received: {0}", error.ToString());
+        // Log.Error("ExampleNaturalLanguageUnderstanding.OnFail()", "Error received: {0}", error.ToString());
     }
 
     private void NLUAnalyze(string message) {
         Parameters parameters = CreatingParametersNLU(message);
         if (!_naturalLanguageUnderstanding.Analyze(OnAnalyze, OnFail, parameters))
             Log.Debug("ExampleNaturalLanguageUnderstanding.Analyze()", "Failed to get models.");
-        Log.Debug("ExampleNaturalLanguageUnderstanding.Examples()", "Natural language understanding examples complete.");
+        // Log.Debug("ExampleNaturalLanguageUnderstanding.Examples()", "Natural language understanding examples complete.");
 
     }
 
@@ -285,7 +285,7 @@ public class WatsonManager : MonoBehaviour
                         {
                             var usermessage = text.Substring(0, text.Length - "(Final, 0.99)".Length - 2);
                             usermessage += " Analyze";
-                            Log.Debug("This is your message", usermessage);
+                            // Log.Debug("This is your message", usermessage);
                             NLUAnalyze(usermessage);
                         }
 

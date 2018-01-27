@@ -11,11 +11,19 @@ public class MessageSender : NetworkBehaviour {
 
   public void SendResponse(float sentimentScore) {
     Debug.Log("Sending response");
+    Debug.Log("SERVER " + isServer + " " + isLocalPlayer);
     if (isServer) {
-      Debug.Log("IS SERVER");
       gameManager.UpdatePlayerOneResponse(sentimentScore);
       return;
     };
-    gameManager.CmdUpdatePlayerTwoResponse(sentimentScore);
+    if (isLocalPlayer) {
+      CmdUpdatePlayerTwoResponse(sentimentScore);
+    }
+  }
+
+  [Command]
+  public void CmdUpdatePlayerTwoResponse(float response) {
+    gameManager.playerTwoResponse = response;
+    Debug.Log("UPDATED PLAYER TWO RESPONSE " + response);
   }
 }

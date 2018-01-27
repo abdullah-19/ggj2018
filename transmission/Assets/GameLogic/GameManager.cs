@@ -37,11 +37,7 @@ public class GameManager : NetworkBehaviour {
     Debug.Log("UPDATED PLAYER ONE RESPONSE " + response);
     }
 
-    void Update() {
-    Debug.Log("VARS " + playerTwoResponse + " " + playerOneResponse);
-    }
-
-    IEnumerator GetReady() {
+  IEnumerator GetReady() {
     // SetUpRound(allRounds);
     // PlayMusic();
     // notifierController.DisplayTextOnTopOfScreen("Get Ready", 2);
