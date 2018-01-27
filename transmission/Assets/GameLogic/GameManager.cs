@@ -21,7 +21,7 @@ public class GameManager : NetworkBehaviour {
 
   }
 
-  IEnumerator GetReady() {
+  //IEnumerator GetReady() {
     // SetUpRound(allRounds);
     // PlayMusic();
     // streakNotifier.DisplayTextOnTopOfScreen((allRounds.Count() > 1 ? (allRounds.Count() + 1) + " Rounds" : "1 Round"), 3);
@@ -41,7 +41,7 @@ public class GameManager : NetworkBehaviour {
     // announcer.PlayBeginSound();
     // streakNotifier.DisplayTextOnTopOfScreen("BEGIN", 1);
     // StartRound();
-  }
+  //}
 
   void Awake() {
     timeController = transform.GetComponent<TimeController>();

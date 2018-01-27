@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465934, g: 0.49642956, b: 0.57482487, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -222,6 +222,16 @@ Prefab:
       propertyPath: m_PlayerSpawnMethod
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114250415863527394, guid: cda282c39efb34a3286d49bae29ea7e9,
+        type: 2}
+      propertyPath: m_NetworkAddress
+      value: 54.174.33.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 114250415863527394, guid: cda282c39efb34a3286d49bae29ea7e9,
+        type: 2}
+      propertyPath: m_UseWebSockets
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cda282c39efb34a3286d49bae29ea7e9, type: 2}
   m_IsPrefabParent: 0
@@ -268,6 +278,10 @@ Prefab:
       propertyPath: m_Name
       value: MicrophoneManager
       objectReference: {fileID: 0}
+    - target: {fileID: 1678862067231552, guid: 323c69f446afb4d7d8202725be37dc8b, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 323c69f446afb4d7d8202725be37dc8b, type: 2}
   m_IsPrefabParent: 0
@@ -282,6 +296,7 @@ GameObject:
   - component: {fileID: 1555064078}
   - component: {fileID: 1555064077}
   - component: {fileID: 1555064076}
+  - component: {fileID: 1555064080}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -351,6 +366,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1555064080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1555064075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c5b65421f77b4591af89cafdcdf9d67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ResultsField: {fileID: 0}
 --- !u!1001 &1859579195
 Prefab:
   m_ObjectHideFlags: 0
@@ -580,6 +607,10 @@ Prefab:
         type: 2}
       propertyPath: m_ServerOnly
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1690378010581246, guid: 05ec8b94504504c85be75932f0184f67, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 05ec8b94504504c85be75932f0184f67, type: 2}
