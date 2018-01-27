@@ -6,10 +6,10 @@ using UnityEngine.Networking;
 public class GameManager : NetworkBehaviour {
   private TimeController timeController;
   private NotifierController notifierController;
-  // [SyncVar]
-  // public WatsonResponse playerOneResponse;
-  // [SyncVar]
-  // public WatsonResponse playerTwoResponse;
+  [SyncVar]
+  public WatsonResponse playerOneResponse;
+  [SyncVar]
+  public WatsonResponse playerTwoResponse;
 
   void Start () {
     // SetUpComponents();
@@ -20,6 +20,21 @@ public class GameManager : NetworkBehaviour {
 
   void WaitForOtherPlayer() {
 
+  }
+
+
+
+  [Command]
+  public void CmdUpdatePlayerTwoResponse(WatsonResponse response) {
+    if(!isLocalPlayer)
+    {
+      if (isServer) return;
+      playerTwoResponse = response;
+    }
+  }
+
+  void Update() {
+    Debug.Log("PlayerTwo " + playerTwoResponse);
   }
 
   IEnumerator GetReady() {
