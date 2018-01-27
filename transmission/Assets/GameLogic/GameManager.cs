@@ -28,35 +28,35 @@ public class GameManager : NetworkBehaviour {
 
     [Command]
     public void CmdUpdatePlayerTwoResponse(float response) {
-    playerTwoResponse = response;
-    Debug.Log("UPDATED PLAYER TWO RESPONSE " + response);
+        playerTwoResponse = response;
+        Debug.Log("UPDATED PLAYER TWO RESPONSE " + response);
     }
 
     public void UpdatePlayerOneResponse(float response) {
-    playerOneResponse = response;
-    Debug.Log("UPDATED PLAYER ONE RESPONSE " + response);
+        playerOneResponse = response;
+        Debug.Log("UPDATED PLAYER ONE RESPONSE " + response);
     }
 
-  IEnumerator GetReady() {
-    // SetUpRound(allRounds);
-    // PlayMusic();
-    // notifierController.DisplayTextOnTopOfScreen("Get Ready", 2);
-    yield return new WaitForSecondsRealtime(2);
-    // streakNotifier.DisplayTextOnTopOfScreen(codeBlock.Length + " Chars", 3);
-    // yield return new WaitForSecondsRealtime(2);
-    // announcer.PlayGetReadySound();
-    // streakNotifier.DisplayTextOnTopOfScreen("Get Ready", 2);
-    // yield return new WaitForSecondsRealtime(1);
-    // streakNotifier.DisplayTextOnTopOfScreen("3", 1);
-    // yield return new WaitForSecondsRealtime(1);
-    // streakNotifier.DisplayTextOnTopOfScreen("2", 1);
-    // yield return new WaitForSecondsRealtime(1);
-    // streakNotifier.DisplayTextOnTopOfScreen("1", 1);
-    // PlayReloadSound();
-    // yield return new WaitForSecondsRealtime(1);
-    // announcer.PlayBeginSound();
-    // streakNotifier.DisplayTextOnTopOfScreen("BEGIN", 1);
-    // StartRound();
+    IEnumerator GetReady() {
+        // SetUpRound(allRounds);
+        // PlayMusic();
+        // notifierController.DisplayTextOnTopOfScreen("Get Ready", 2);
+        yield return new WaitForSecondsRealtime(2);
+        // streakNotifier.DisplayTextOnTopOfScreen(codeBlock.Length + " Chars", 3);
+        // yield return new WaitForSecondsRealtime(2);
+        // announcer.PlayGetReadySound();
+        // streakNotifier.DisplayTextOnTopOfScreen("Get Ready", 2);
+        // yield return new WaitForSecondsRealtime(1);
+        // streakNotifier.DisplayTextOnTopOfScreen("3", 1);
+        // yield return new WaitForSecondsRealtime(1);
+        // streakNotifier.DisplayTextOnTopOfScreen("2", 1);
+        // yield return new WaitForSecondsRealtime(1);
+        // streakNotifier.DisplayTextOnTopOfScreen("1", 1);
+        // PlayReloadSound();
+        // yield return new WaitForSecondsRealtime(1);
+        // announcer.PlayBeginSound();
+        // streakNotifier.DisplayTextOnTopOfScreen("BEGIN", 1);
+        // StartRound();
     }
 
     void Awake() {
