@@ -29,10 +29,6 @@ public class GameManager : NetworkBehaviour {
     Debug.Log("UPDATED PLAYER ONE RESPONSE " + response);
   }
 
-  void Update() {
-    Debug.Log("VARS " + playerTwoResponse + " " + playerOneResponse);
-  }
-
   IEnumerator GetReady() {
     // SetUpRound(allRounds);
     // PlayMusic();

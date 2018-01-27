@@ -11,8 +11,8 @@ public class MessageSender : NetworkBehaviour {
 
   public void SendResponse(float sentimentScore) {
     Debug.Log("Sending response");
-    if (isServer) {
-      Debug.Log("IS SERVER");
+    Debug.Log("SERVER " + isServer + " " + isLocalPlayer);
+    if (isLocalPlayer) {
       gameManager.UpdatePlayerOneResponse(sentimentScore);
       return;
     };
