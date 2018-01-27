@@ -28,8 +28,4 @@ public class NotifierController : MonoBehaviour {
     return notification.enabled;
   }
 
-	// Update is called once per frame
-	void Update () {
-
-	}
 }

@@ -7,9 +7,9 @@ public class GameManager : NetworkBehaviour {
   private TimeController timeController;
   private NotifierController notifierController;
   [SyncVar]
-  public WatsonResponse playerOneResponse;
+  public float playerOneResponse;
   [SyncVar]
-  public WatsonResponse playerTwoResponse;
+  public float playerTwoResponse;
 
   void Start () {
     // SetUpComponents();
@@ -19,12 +19,12 @@ public class GameManager : NetworkBehaviour {
   }
 
   [Command]
-  public void CmdUpdatePlayerTwoResponse(WatsonResponse response) {
+  public void CmdUpdatePlayerTwoResponse(float response) {
     playerTwoResponse = response;
     Debug.Log("UPDATED PLAYER TWO RESPONSE " + response);
   }
 
-  public void UpdatePlayerOneResponse(WatsonResponse response) {
+  public void UpdatePlayerOneResponse(float response) {
     playerOneResponse = response;
     Debug.Log("UPDATED PLAYER ONE RESPONSE " + response);
   }

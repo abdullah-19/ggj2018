@@ -9,13 +9,13 @@ public class MessageSender : NetworkBehaviour {
     gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
   }
 
-  public void SendResponse(WatsonResponse watsonResponse) {
+  public void SendResponse(float sentimentScore) {
     Debug.Log("Sending response");
     if (isServer) {
       Debug.Log("IS SERVER");
-      gameManager.UpdatePlayerOneResponse(watsonResponse);
+      gameManager.UpdatePlayerOneResponse(sentimentScore);
       return;
     };
-    gameManager.CmdUpdatePlayerTwoResponse(watsonResponse);
+    gameManager.CmdUpdatePlayerTwoResponse(sentimentScore);
   }
 }

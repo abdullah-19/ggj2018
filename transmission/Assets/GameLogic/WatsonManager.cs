@@ -138,7 +138,7 @@ public class WatsonManager : MonoBehaviour
         watsonResponse.fearScore = fear;
         watsonResponse.disgustScore = disgust;
         watsonResponse.angerScore = anger;
-        messageSender.SendResponse(watsonResponse);
+        messageSender.SendResponse(watsonResponse.sentiementScore);
         _analyzeTested = true;
     }
 
