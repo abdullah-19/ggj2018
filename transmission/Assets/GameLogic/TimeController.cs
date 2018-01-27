@@ -45,7 +45,6 @@ public class TimeController : NetworkBehaviour {
 			}
 			timeRemaining = i;
 			yield return new WaitForSecondsRealtime(1);
-      Debug.Log("TIME REMAINING: " + timeRemaining);
 		}
 	}
 
