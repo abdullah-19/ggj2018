@@ -20,8 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4382116057058294}
   - component: {fileID: 114152819420602954}
-  - component: {fileID: 114524966904022556}
-  - component: {fileID: 114929695943327172}
+  - component: {fileID: 114735644800883680}
+  - component: {fileID: 114506324546806598}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -147,7 +147,7 @@ MonoBehaviour:
     i15: 128
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
---- !u!114 &114524966904022556
+--- !u!114 &114506324546806598
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -155,20 +155,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1063085317158912}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Script: {fileID: 11500000, guid: a716907066b2c433a91efe1f0f129e67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TransformSyncMode: 1
-  m_SendInterval: 0.1
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 0
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.001
-  m_VelocityThreshold: 0.0001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 1
---- !u!114 &114929695943327172
+--- !u!114 &114735644800883680
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -176,9 +166,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1063085317158912}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da8f1a314302344f7b40565559959fd4, type: 3}
+  m_Script: {fileID: 11500000, guid: 6c5b65421f77b4591af89cafdcdf9d67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ResultsField: {fileID: 0}
+  messageSender: {fileID: 114506324546806598}
 --- !u!135 &135292876884449680
 SphereCollider:
   m_ObjectHideFlags: 1
