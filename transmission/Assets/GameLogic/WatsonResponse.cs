@@ -1,4 +1,4 @@
-﻿public class WatsonResponse {
+﻿public struct WatsonResponse {
     public string userMessage;
     public float sentiementScore;
     public string sentiementLabel;

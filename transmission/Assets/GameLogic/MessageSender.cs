@@ -3,25 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 public class MessageSender : NetworkBehaviour {
-    [SyncVar]
-    WatsonResponse player2Message; 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+  GameManager gameManager;
 
-    [Command]
-    void CmdsendWatsonReponse(WatsonResponse response)
-    {
-        if(!isLocalPlayer) 
-        {
-            player2Message = response;   
-        }
-        
-    } 
+  void Awake() {
+    gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+  }
+
+  public void SendResponse(float sentimentScore) {
+    Debug.Log("Sending response");
+    if (isServer) {
+      Debug.Log("IS SERVER");
+      gameManager.UpdatePlayerOneResponse(sentimentScore);
+      return;
+    };
+    gameManager.CmdUpdatePlayerTwoResponse(sentimentScore);
+  }
 }

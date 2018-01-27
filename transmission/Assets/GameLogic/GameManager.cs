@@ -6,10 +6,10 @@ using UnityEngine.Networking;
 public class GameManager : NetworkBehaviour {
   private TimeController timeController;
   private NotifierController notifierController;
-  // [SyncVar]
-  // public WatsonResponse playerOneResponse;
-  // [SyncVar]
-  // public WatsonResponse playerTwoResponse;
+  [SyncVar]
+  public float playerOneResponse;
+  [SyncVar]
+  public float playerTwoResponse;
 
   void Start () {
     // SetUpComponents();
@@ -18,14 +18,25 @@ public class GameManager : NetworkBehaviour {
     StartCoroutine(GetReady());
   }
 
-  void WaitForOtherPlayer() {
-
+  [Command]
+  public void CmdUpdatePlayerTwoResponse(float response) {
+    playerTwoResponse = response;
+    Debug.Log("UPDATED PLAYER TWO RESPONSE " + response);
   }
 
-  //IEnumerator GetReady() {
+  public void UpdatePlayerOneResponse(float response) {
+    playerOneResponse = response;
+    Debug.Log("UPDATED PLAYER ONE RESPONSE " + response);
+  }
+
+  void Update() {
+    Debug.Log("VARS " + playerTwoResponse + " " + playerOneResponse);
+  }
+
+  IEnumerator GetReady() {
     // SetUpRound(allRounds);
     // PlayMusic();
-    notifierController.DisplayTextOnTopOfScreen("Get Ready", 2);
+    // notifierController.DisplayTextOnTopOfScreen("Get Ready", 2);
     yield return new WaitForSecondsRealtime(2);
     // streakNotifier.DisplayTextOnTopOfScreen(codeBlock.Length + " Chars", 3);
     // yield return new WaitForSecondsRealtime(2);
@@ -42,7 +53,7 @@ public class GameManager : NetworkBehaviour {
     // announcer.PlayBeginSound();
     // streakNotifier.DisplayTextOnTopOfScreen("BEGIN", 1);
     // StartRound();
-  //}
+  }
 
   void Awake() {
     timeController = transform.GetComponent<TimeController>();

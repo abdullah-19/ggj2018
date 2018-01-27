@@ -30,13 +30,15 @@ public class WatsonManager : MonoBehaviour
 
     private SpeechToText _speechToText;
 
-    //NLU 
-    private NaturalLanguageUnderstanding _naturalLanguageUnderstanding; 
+    //NLU
+    private NaturalLanguageUnderstanding _naturalLanguageUnderstanding;
 
     private bool _getModelsTested = false;
     private bool _analyzeTested = false;
     private string _nluAuthenticationToken;
 
+    private WatsonResponse watsonResponse = new WatsonResponse();
+    public MessageSender messageSender;
     void Start()
     {
         if (!Utility.GetToken(OnGetToken, _nluURL, _nluUserName, _nluPassword))
@@ -44,7 +46,7 @@ public class WatsonManager : MonoBehaviour
 
         LogSystem.InstallDefaultReactors();
 
-        //Speech to Text 
+        //Speech to Text
         Credentials sttCredentials = new Credentials(_sttUsername, _sttPassword, _sttURL);
 
         _speechToText = new SpeechToText(sttCredentials);
@@ -57,10 +59,10 @@ public class WatsonManager : MonoBehaviour
             AuthenticationToken = _nluAuthenticationToken
         };
         _naturalLanguageUnderstanding = new NaturalLanguageUnderstanding(nluCredentials);
-        NLUAnalyze("I hate you so much! Analyze");
+        //NLUAnalyze("I hate you so much! Analyze");
     }
 
-    public void EnableWatsonSST() 
+    public void EnableWatsonSST()
     {
         StartRecording();
     }
@@ -72,7 +74,7 @@ public class WatsonManager : MonoBehaviour
     }
 
 
-    //NLU AuthenticationToken 
+    //NLU AuthenticationToken
     private void OnGetToken(AuthenticationToken authenticationToken, string customData)
     {
         _nluAuthenticationToken = authenticationToken.ToString();
@@ -128,6 +130,15 @@ public class WatsonManager : MonoBehaviour
         float disgust = resp.emotion.document.emotion.disgust;
         float anger = resp.emotion.document.emotion.anger;
         Debug.Log("This is your sadness: " + sadness+ ", joy: " + joy + " fear: " + fear + " disgust: " + disgust + " anger: " + anger);
+
+        watsonResponse.sentiementScore = resp.sentiment.document.score;
+        watsonResponse.sentiementLabel = label;
+        watsonResponse.sadnessScore = sadness;
+        watsonResponse.joyScore = joy;
+        watsonResponse.fearScore = fear;
+        watsonResponse.disgustScore = disgust;
+        watsonResponse.angerScore = anger;
+        messageSender.SendResponse(watsonResponse.sentiementScore);
         _analyzeTested = true;
     }
 
@@ -244,7 +255,7 @@ public class WatsonManager : MonoBehaviour
             }
             else
             {
-                // calculate the number of samples remaining until we ready for a block of audio, 
+                // calculate the number of samples remaining until we ready for a block of audio,
                 // and wait that amount of time it will take to record.
                 int remaining = bFirstBlock ? (midPoint - writePos) : (_recording.samples - writePos);
                 float timeRemaining = (float)remaining / (float)_recordingHZ;
@@ -268,9 +279,9 @@ public class WatsonManager : MonoBehaviour
                     string text = string.Format("{0} ({1}, {2:0.00})\n", alt.transcript, res.final ? "Final" : "Interim", alt.confidence);
                     //Log.Debug("ExampleStreaming.OnRecognize()", text);
                     //ResultsField.text = text;
-                    if(res.final) 
+                    if(res.final)
                     {
-                        if(text.Split().Length > 3) 
+                        if(text.Split().Length > 3)
                         {
                             var usermessage = text.Substring(0, text.Length - "(Final, 0.99)".Length - 2);
                             usermessage += " Analyze";
@@ -312,16 +323,10 @@ public class WatsonManager : MonoBehaviour
             }
         }
     }
-}
 
-
-public class WatsonNLUResponse 
-{
-    public string userMessage;
-    public float sentiementScore;
-    public float sentiementLabel;
-    public float joyScore;
-    public float fearScore;
-    public float disgustScore;
-    public float angerScore; 
+    void Awake() {
+      if (messageSender == null) {
+        messageSender = GetComponent<MessageSender>();
+      }
+    }
 }
