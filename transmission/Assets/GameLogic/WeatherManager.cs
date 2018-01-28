@@ -38,7 +38,7 @@ public class WeatherManager : MonoBehaviour
 		changeSceneWeather();
 	} 
 
-	void IncrementWeatherState()
+	public void IncrementWeatherState()
 	{
 		if (weatherState != WeatherState.Pos3)
 		{
@@ -46,7 +46,7 @@ public class WeatherManager : MonoBehaviour
 		}
 	}
 
-	void DecrementWeatherState()
+	public void DecrementWeatherState()
 	{
 		if (weatherState != WeatherState.Neg3)
 		{
