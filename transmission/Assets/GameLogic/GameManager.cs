@@ -14,12 +14,13 @@ public class GameManager : NetworkBehaviour {
   [SyncVar]
   private bool gameStarted = false;
   private NotifierController notifierController;
+  private WatsonManager watsonManager;
   private WeatherManager weatherManager;
 
   void Start () {
     // SetUpComponents();
     // Find reference to WeatherManager
-    weatherManager = GameObject.Find("WeatherManager").GetComponent<WeatherManager>();
+
   }
 
   public void UpdatePlayerOneResponse(float response) {
@@ -43,7 +44,14 @@ public class GameManager : NetworkBehaviour {
   }
 
   void StartRound() {
-    timeController.StartTime(5);
+    watsonManager.EnableWatsonSST();
+    timeController.StartTime(10);
+    // RPC start recording
+  }
+
+  public void EndRound() {
+    watsonManager.DisableWatsonSST();
+    // RPC End recording
   }
 
   string playerEmotion() {
@@ -54,6 +62,8 @@ public class GameManager : NetworkBehaviour {
   void Awake() {
     timeController = transform.GetComponent<TimeController>();
     notifierController = GameObject.Find("UI/Notifier").GetComponent<NotifierController>();
+    weatherManager = GameObject.Find("WeatherManager").GetComponent<WeatherManager>();
+    watsonManager = GetComponent<WatsonManager>();
   }
 
   void Update() {
@@ -66,6 +76,7 @@ public class GameManager : NetworkBehaviour {
     var players = GameObject.FindGameObjectsWithTag("Player");
     if (players.Length > 1) {
       StartCoroutine(GetReady());
+      // TODO: START ROUTINE FOR CLIENT
       gameStarted = true;
     }
   }

@@ -39,7 +39,7 @@ public class WatsonManager : MonoBehaviour
 
     [SerializeField]
     private bool _enabledSTT = true;
-    private bool _flag = false; 
+    private bool _flag = false;
 
     private WatsonResponse watsonResponse = new WatsonResponse();
     public MessageSender messageSender;
@@ -68,16 +68,16 @@ public class WatsonManager : MonoBehaviour
 
     private void Update()
     {
-        if(_enabledSTT && _flag == false)
-        {
-            _flag = true; 
-            EnableWatsonSST();
-        }
-        if(_enabledSTT == false)
-        {
-            DisableWatsonSST();
-            _flag = false; 
-        }
+        // if(_enabledSTT && _flag == false)
+        // {
+        //     _flag = true;
+        //     EnableWatsonSST();
+        // }
+        // if(_enabledSTT == false)
+        // {
+        //     DisableWatsonSST();
+        //     _flag = false;
+        // }
     }
 
     public void EnableWatsonSST()
@@ -90,7 +90,6 @@ public class WatsonManager : MonoBehaviour
     {
         StopRecording();
     }
-
 
     //NLU AuthenticationToken
     private void OnGetToken(AuthenticationToken authenticationToken, string customData)
@@ -163,14 +162,14 @@ public class WatsonManager : MonoBehaviour
 
     private void OnFail(RESTConnector.Error error, Dictionary<string, object> customData)
     {
-        // Log.Error("ExampleNaturalLanguageUnderstanding.OnFail()", "Error received: {0}", error.ToString());
+        Log.Error("ExampleNaturalLanguageUnderstanding.OnFail()", "Error received: {0}", error.ToString());
     }
 
     private void NLUAnalyze(string message) {
         Parameters parameters = CreatingParametersNLU(message);
         if (!_naturalLanguageUnderstanding.Analyze(OnAnalyze, OnFail, parameters))
             Log.Debug("ExampleNaturalLanguageUnderstanding.Analyze()", "Failed to get models.");
-        // Log.Debug("ExampleNaturalLanguageUnderstanding.Examples()", "Natural language understanding examples complete.");
+        Log.Debug("ExampleNaturalLanguageUnderstanding.Examples()", "Natural language understanding examples complete.");
 
     }
 
@@ -304,7 +303,7 @@ public class WatsonManager : MonoBehaviour
                         {
                             var usermessage = text.Substring(0, text.Length - "(Final, 0.99)".Length - 2);
                             usermessage += " Analyze";
-                            // Log.Debug("This is your message", usermessage);
+                            Log.Debug("This is your message", usermessage);
                             NLUAnalyze(usermessage);
                         }
 
