@@ -9,8 +9,10 @@ public class TimeController : NetworkBehaviour {
 	public int timeRemaining;
   Text timerText;
   int ROUND_LENGTH = 30;
+  GameManager gameManager;
 
 	void Awake() {
+    gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 		timeRemaining = ROUND_LENGTH;
     timerText = GameObject.Find("GameClock").GetComponent<Text>();
 	}
@@ -35,6 +37,7 @@ public class TimeController : NetworkBehaviour {
 	public void StopTime() {
 		timeRemaining = 1; // Prevents defeat from playing on a win!
 		StopCoroutine("Countdown");
+    gameManager.EndRound();
 	}
 
 	IEnumerator Countdown(int duration) {
@@ -45,7 +48,6 @@ public class TimeController : NetworkBehaviour {
 			}
 			timeRemaining = i;
 			yield return new WaitForSecondsRealtime(1);
-      Debug.Log("TIME REMAINING: " + timeRemaining);
 		}
 	}
 

@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class WeatherManager : MonoBehaviour
 {
-
 	private Tenkoku.Core.TenkokuModule tenkokuModule;
 
 	 enum WeatherState {
@@ -46,7 +45,7 @@ public class WeatherManager : MonoBehaviour
 		}
 	}
 
-	public void DecrementWeatherState()
+    public void DecrementWeatherState()
 	{
 		if (weatherState != WeatherState.Neg3)
 		{

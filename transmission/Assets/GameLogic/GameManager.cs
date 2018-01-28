@@ -5,59 +5,79 @@ using UnityEngine.Networking;
 
 public class GameManager : NetworkBehaviour {
   private TimeController timeController;
-  private NotifierController notifierController;
+  // Positive Sentiment
   [SyncVar]
   public float playerOneResponse;
+  // Negative Sentiment
   [SyncVar]
   public float playerTwoResponse;
+  [SyncVar]
+  private bool gameStarted = false;
+  private NotifierController notifierController;
+  private WatsonManager watsonManager;
+  private WeatherManager weatherManager;
 
   void Start () {
     // SetUpComponents();
-    timeController.StartTime(30);
-    // When other player connects...
-    StartCoroutine(GetReady());
-  }
+    // Find reference to WeatherManager
 
-  [Command]
-  public void CmdUpdatePlayerTwoResponse(float response) {
-    playerTwoResponse = response;
-    Debug.Log("UPDATED PLAYER TWO RESPONSE " + response);
   }
 
   public void UpdatePlayerOneResponse(float response) {
-    playerOneResponse = response;
-    Debug.Log("UPDATED PLAYER ONE RESPONSE " + response);
-  }
-
-  void Update() {
-    Debug.Log("VARS " + playerTwoResponse + " " + playerOneResponse);
+    playerOneResponse += response;
   }
 
   IEnumerator GetReady() {
-    // SetUpRound(allRounds);
     // PlayMusic();
-    // notifierController.DisplayTextOnTopOfScreen("Get Ready", 2);
-    yield return new WaitForSecondsRealtime(2);
-    // streakNotifier.DisplayTextOnTopOfScreen(codeBlock.Length + " Chars", 3);
-    // yield return new WaitForSecondsRealtime(2);
-    // announcer.PlayGetReadySound();
-    // streakNotifier.DisplayTextOnTopOfScreen("Get Ready", 2);
-    // yield return new WaitForSecondsRealtime(1);
-    // streakNotifier.DisplayTextOnTopOfScreen("3", 1);
-    // yield return new WaitForSecondsRealtime(1);
-    // streakNotifier.DisplayTextOnTopOfScreen("2", 1);
-    // yield return new WaitForSecondsRealtime(1);
-    // streakNotifier.DisplayTextOnTopOfScreen("1", 1);
-    // PlayReloadSound();
-    // yield return new WaitForSecondsRealtime(1);
-    // announcer.PlayBeginSound();
-    // streakNotifier.DisplayTextOnTopOfScreen("BEGIN", 1);
-    // StartRound();
+    notifierController.DisplayTextOnTopOfScreen("Get Ready", 3);
+    yield return new WaitForSecondsRealtime(3);
+    notifierController.DisplayTextOnTopOfScreen("3", 1);
+    yield return new WaitForSecondsRealtime(1);
+    notifierController.DisplayTextOnTopOfScreen("2", 1);
+    yield return new WaitForSecondsRealtime(1);
+    notifierController.DisplayTextOnTopOfScreen("1", 1);
+    yield return new WaitForSecondsRealtime(1);
+    var emotionString = playerEmotion();
+    notifierController.DisplayTextOnTopOfScreen(emotionString, 1);
+    yield return new WaitForSecondsRealtime(1);
+    StartRound();
+  }
+
+  void StartRound() {
+    watsonManager.EnableWatsonSST();
+    timeController.StartTime(10);
+    // RPC start recording
+  }
+
+  public void EndRound() {
+    watsonManager.DisableWatsonSST();
+    // RPC End recording
+  }
+
+  string playerEmotion() {
+    if (isServer) return "SPEAK POSITIVELY";
+    return "SPEAK NEGATIVELY";
   }
 
   void Awake() {
     timeController = transform.GetComponent<TimeController>();
     notifierController = GameObject.Find("UI/Notifier").GetComponent<NotifierController>();
+    weatherManager = GameObject.Find("WeatherManager").GetComponent<WeatherManager>();
+    watsonManager = GetComponent<WatsonManager>();
   }
 
+  void Update() {
+    if (!isServer) return;
+    if (gameStarted) return;
+    checkIfTwoPlayers();
+  }
+
+  void checkIfTwoPlayers() {
+    var players = GameObject.FindGameObjectsWithTag("Player");
+    if (players.Length > 1) {
+      StartCoroutine(GetReady());
+      // TODO: START ROUTINE FOR CLIENT
+      gameStarted = true;
+    }
+  }
 }

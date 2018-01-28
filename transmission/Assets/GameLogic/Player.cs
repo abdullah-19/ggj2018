@@ -4,25 +4,15 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public class Player : NetworkBehaviour {
-  [SyncVar]
-  bool isRecording;
+    [SyncVar]
+    bool isRecording;
 
-	// Use this for initialization
-	void Start () {
+    void Update() {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
 
-	}
-
-  void Update() {
-
-  }
-
-  [Command]
-  void CmdSendWatsonResponse() {
-    if (!isLocalPlayer) return;
-
-  }
-
-  
-
-
+        transform.RotateAround(Vector3.zero, Vector3.up, 20 * Time.deltaTime);
+    }
 }
